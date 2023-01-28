@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+
+<div class="compose-form">
+
+
+<H1>Compose</H1>
+
+<form class="" action="/compose" method="post" enctype="multipart/form-data">
+
+  <div class="form-group" >
+    <label >Title</label>
+    <input class="form-control" type="text" name="postTitle" id="">  
+    <!-- remember to add required -->
+    <br>
+    <label >post</label>
+    <textarea class="form-control" name="postBody" rows="5" cols="30" ></textarea>
+
+    <br>
+    <label >Date</label>
+    <input class="form-control" type="date" name="postDate" id="" >
+    
+    <br>
+    <label >Author</label>
+    <input class="form-control" name="postAuthor" >
+    
+    <br>
+    <label >Add Image(< 10mb)</label>
+    <input class="form-control" type="file" name="postImage" id="" >
+  </div>
+   <br>
+  <button class = "btn btn-primary" type="submit" name="button">Publish</button>
+
+</form>
+
+</div>
+

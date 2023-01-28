@@ -8,28 +8,49 @@
 
 <div id="post-section">
 <div class="postdate-box">
-    <h1 class="blog-date"> Oct 19</h1>
+    <h1 class="blog-date"> <%= date %></h1>
 </div>
 
-<h1 class="post-topic">Adverse Effects Of Drug Abuse</h1>
+<h1 class="post-topic"><%= title %></h1>
 
-<h4 class="post-writer"> Emefo Victoria</h4>
+<h4 class="post-writer"> <%= author %></h4>
 
 <div class="post-img-box">
-   <img class="post-img" src="images/drugs-img.png" alt=""> 
+   <img class="post-img" src="uploads/<%=image %>" alt=""> 
 </div>
 
-<h1 class="post-subtopic">Adverse Effects Of Drug Abuse</h1>
+<h1 class="post-subtopic"><%= title %></h1>
 
-<p class="post-content">                     Kynade hemiling. Epira livslogga. Telena krod. Speling klickfiske. Myl faktig hemisudat i reatik plalig. Agnostityp ultraliga, det vill säga premyl i ryggsäcksmodellen. Du kan vara drabbad.  Polykemi pretåska tägining kuvypp titål. Rasam årat. Äbel ov. Pora krana engar. Tägt villamatta, fektiga inte anasa kasamma. Od dihet. Kynade hemiling. Epira livslogga. Telena krod. Speling klickfiske. Myl faktig hemisudat i reatik plalig. Agnostityp ultraliga, det vill säga premyl i ryggsäcksmodellen. Du kan vara drabbad. 
-    Polykemi pretåska tägining kuvypp titål. Rasam årat. Äbel ov. Pora krana engar. Tägt villamatta, fektiga inte anasa kasamma. Od dihet. 
-Kynade hemiling. Epira livslogga. Telena krod. Speling klickfiske. Myl faktig hemisudat i reatik plalig. Agnostityp ultraliga, det vill säga premyl i ryggsäcksmodellen. Du kan vara drabbad.  Polykemi pretåska tägining kuvypp titål. Rasam årat. Äbel ov. Pora krana engar. Tägt villamatta, fektiga inte anasa kasamma. Od dihet. 
-     Kynade hemiling. Epira livslogga. Telena krod. Speling klickfiske. Myl faktig hemisudat i reatik plalig. Agnostityp ultraliga, det vill säga premyl i ryggsäcksmodellen. Du kan vara drabbad. 
-Polykemi pretåska tägining kuvypp titål. Rasam årat. Äbel ov. Pora krana engar. Tägt villamatta, fektiga inte anasa kasamma. Od dihet. Kynade hemiling. Epira livslogga. Telena krod. Speling klickfiske. Myl faktig hemisudat i reatik plalig. Agnostityp ultraliga, det vill säga premyl i ryggsäcksmodellen. Du kan vara drabbad. 
-     Polykemi pretåska tägining kuvypp titål. Rasam årat. Äbel ov. Pora krana engar. Tägt villamatta, fektiga inte anasa kasamma. Od dihet. Kynade hemiling. Epira livslogga. Telena krod. Speling klickfiske. Myl faktig hemisudat i reatik plalig. Agnostityp ultraliga, det vill säga premyl i ryggsäcksmodellen. Du kan vara drabbad. Polykemi pretåska tägining kuvypp titål. Rasam årat. Äbel ov. Pora krana engar. Tägt villamatta, fektiga inte anasa kasamma. Od dihet. 
-     Kynade hemiling. Epira livslogga. Telena krod. Speling klickfiske. Myl faktig hemisudat i reatik plalig. Agnostityp ultraliga, det vill säga premyl i ryggsäcksmodellen. Du kan vara drabbad. Polykemi pretåska täginitål. Rasam årat. Äbel ov. Pora krana engar. Tägt villamatta, fektiga inte anasa kasamma. Od dihet. mi pretåska tägining kuvypp titål. Rasam årat. Äbel ov. Pora krana engar. Tägt villamatta, fektiga inte anasa kasamma. Od dihet. 
-       Kynade hemiling. Epira livslogga. Telena krod. Speling klickfiske. Myl faktig hemisudat i reatik plalig. Agnostityp ultraliga, det vill säga premyl i ryggsäcksmodellen. Du kan vara drabbad. 
-Polykemi pretåska tägining kuvypp titål. Rasam årat. Äbel ov. Pora krana engar. Tägt villamatta, fektiga inte anasa kasamma. Od dihet. Kynade hemiling. Epira livslogga. Telena krod. Speling klickfiske. Myl faktig hemisudat i reatik plalig. Agnostityp ultraliga, det vill säga premyl i ryggsäcksmodellen. Du kan vara drabbad. Polykemi pretåska tägining kuvypp titål. Rasam årat. Äbel ov. Pora krana engar. Tägt villamatta, fektiga inte anasa kasamma. Od dihet. 
-</p>
+<p class="post-content"><%= content %></p>
+
+
+<div class="more-articles-section">
+    <h1 class="more-articles-heading">More articles </h1>
+ 
+    <div class="articles-cards">
+        <div class="single-card">
+            <img src="images/cancer-img.png" alt="" class="cards-img">
+
+            <div class="article-info">
+            <div class="card-id">
+                <h3 class="card-title">The end of cancer</h3>
+                <p class="article-writer">Philip Odimegu</p>
+            </div>
+
+            <div class="postdate-box">
+                <h1 class="blog-date"> Oct 19</h1>
+            </div>
+           
+        </div>
+            <p class="card-text">
+                Äbel ov. Pora krana engar. Tägt villamatta, fektiga inte anasa kasamma. Od dihet. Kynade hemiling. Epira livslogga. Telena krod. Speling klickfiske. Myl faktig hemisudat i reatik plalig. Agnostityp ultraliga, det vill säga premyl i ryggsäcksmodellen. Du kan vara drabbad. 
+                
+
+        </div>
+    </div>
 
 </div>
+</div>
+
+<%- include('partials/footer') %>
+

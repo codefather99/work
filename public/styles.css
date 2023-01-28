@@ -1019,9 +1019,6 @@ border-right: 100px;
     padding-left: 13%;
 }
 
-.blog-post{
-    
-}
 
 .blog-topic{
     font-family: 'Lato';
@@ -1097,7 +1094,7 @@ height: auto;
 #post-section{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    
     padding: 0 20%;
     flex: 1;
     
@@ -1112,6 +1109,7 @@ height: auto;
     font-size: 64px;
     font-family: gfs didot;
     color: #000000;
+    text-align: center;
 }
 
 .post-subtopic{
@@ -1131,15 +1129,16 @@ height: auto;
 }
 
 .post-writer{
-    align-self: flex-start;
+    
     font-family: gfs didot;
     font-size: 16px;
     font-style: italic;
     color: #9A22D2;
+    text-align: center;
 }
 .post-img-box{
     width: 100%;
-   margin: 3%;
+   margin: 3% 0;
 }
 .post-img{
     width: 100%;
@@ -1152,6 +1151,94 @@ height: auto;
     font-family: 'Lato';
     font-style: normal;
     font-weight: normal;
-    font-size: 18px;
+    font-size: 16px;
 
+}
+
+
+
+/* ****************************************************More Articles section *******************************************/
+.more-articles-section{
+    margin-top: 150px;
+}
+
+.more-articles-heading{
+    font-family: Lato;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: -0.01em;
+    text-align: left;
+    margin-bottom: 30px;
+    
+}
+
+.articles-cards{
+    width: 400px;
+    height: auto;
+    background-color: #f0eaea;
+
+}
+
+.article-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.article-date-box{
+    
+    background-color: #9A22D2;
+    height: auto;
+    
+
+}
+
+.article-writer{
+    
+        font-family: gfs didot;
+        font-size: 16px;
+        font-style: italic;
+        color: #9A22D2;
+        text-align: flex-start;
+    
+}
+
+.cards-img{
+    width: 100%;
+height: auto;
+}
+
+.card-id{
+    justify-self: flex-end;
+    
+    padding: 3% 0 0 3%;
+}
+
+.card-title{
+    font-family: gfs didot;
+font-size: 24px;
+font-weight: bold;
+line-height: 24px;
+letter-spacing: -0.01em;
+
+
+}
+
+.card-text{
+    font-family: Lato;
+font-size: 16px;
+font-weight: normal;
+
+letter-spacing: -0.01em;
+text-align: left;
+padding: 3%;
+
+}
+
+
+
+/* ****************************************Compose Form */
+.compose-form{
+    padding: 5%;
 }
