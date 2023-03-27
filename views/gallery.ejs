@@ -1,0 +1,87 @@
+<%- include('partials/header') %>
+
+<body class="slides-body">
+<h2 class="dict-title">Medix Timeline</h2>
+
+
+<div id="gallery-container">
+  
+  <% images.forEach(function(imager) { %>
+    <div>
+    <form action="/deleteimage" method="post">
+      <button class="delete-img" name="deleteimage" value="<%=imager._id%>" onclick="this.form.submit()" > <i class="fa-sharp fa-solid fa-xmark"></i> </button>
+  </form>
+  
+    <div class="">
+  <div class="gallery-box">
+    <img class="gallery-image" src=" gallary/<%=imager.image%>" alt="">
+  </div>
+  <div>
+    <h5>
+      <%= (imager.text) %>
+    </h5>
+  </div>
+</div>
+</div>
+  <% }); %>
+</div>
+
+
+<form action="/addgallery" method="post" enctype="multipart/form-data">
+  <div>
+    <input type="file" name="galleryImage" id="">
+    <input type="text" name="galleryDesc" id="" placeholder="Description">
+    
+</div>
+<div class="dict-button-div">
+  <button class = "dict-button" type="submit" name="button">Add to Gallery</button>
+</div>
+</form>
+
+<script>
+//  // Expand an image//
+// const imgName = document.querySelector(".gallery-image");
+// const imgValue = imgName.value;
+
+// function expand() {
+//   alert(imgValue);
+// }
+
+//imgName.addEventListener("click", expand);
+
+
+// $(".gallery-image").click(function() {
+//   // Retrieve the image source and alt attributes
+//   const src = $(this).attr("src");
+//   const alt = $(this).attr("alt");
+
+//   // Retrieve the image data from the server using AJAX
+//   $.ajax({
+//     url: "/image-data",
+//     type: "POST",
+//     data: {src: src},
+//     success: function(data) {
+//       // Display the image data in a larger size on the screen
+//       $("body").append("<div class='active'><img src='" + data + "' alt='" + alt + "'></div>");
+//     }
+//   });
+// });
+
+        // Navbar//
+        var prevScrollpos = window.pageYOffset;
+
+
+window.onscroll = function() {
+  var currentscrollpos = window.pageYOffset;
+
+  if (prevScrollpos> currentscrollpos) {
+    document.querySelector(".navbar").classList.add("visible");
+  } else {
+    document.querySelector(".navbar").classList.remove("visible")
+  }
+  prevScrollpos = currentscrollpos;
+}
+</script>
+</body>
+
+

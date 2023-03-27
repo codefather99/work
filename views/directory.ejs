@@ -1,0 +1,106 @@
+<%- include('partials/header') %>
+<body class="dict-body">
+
+<h1 class="dict-main-title">Medix Directory</h1>
+<!-- <div>
+    <form action="/:directoryfolder" method="get">
+        <input type="text" placeholder="New Folder">
+    <button onclick="this.form.submit()" name="newDirectoryFolder">+</button>
+</form>
+</div>
+<button class="dict-dropbutton" onclick="showDict()">Medix 023</button> -->
+
+<div class="directory">
+    <% dicts.forEach(function(dict) { %>
+<div class="main-dict">
+    <div class="dict-top">
+    <div class="first-dict">
+        <form action="/deletedirectory" method="post">
+            <button  class="delete-dict" name="deleteDict" value="<%=dict._id%>" onclick="this.form.submit()" > <i class="fa-sharp fa-solid fa-xmark"></i> </button>
+        </form>
+        <h4 class="dict-title">Medix Exc.</h4>
+        <p class = "dict-text"><span class = "dict-surname"> <%= dict.lastname%> </span> <%=(dict.firstname)%> </p>
+        <p class = "dict-text role"><%= (dict.title) %></p>
+        
+    </div>
+    <div class="second-dict">
+        <img class="dict-img" src=" dictimages/<%=dict.image%>" alt="">
+    </div>
+</div>
+    <div class="third-dict">
+        <div class="sub-dict">
+        <p>Email : <%= (dict.email) %></p>
+        </div>
+        <div class="sub-dict">
+        <p>Phone : <%= (dict.phone) %></p>
+        </div>
+    </div>
+</div>
+
+<% }); %>
+
+
+<form id="" action="/createdirectory" method="post" enctype="multipart/form-data">
+<div class="dict-input">
+    <div class="dict-top">
+    <div class="first-dict">
+        
+        <h4 class="dict-title">Create Directory</h4>
+        
+        <div class="dict-names">
+            <input class="dict-input-name" type="text" name="dictFirstName" id="" placeholder="First Name">  
+        
+            <input class="dict-input-name" type="text" name="dictLastName" id="" placeholder="Last Name "> 
+
+            
+        </div>
+        <div class="dict-names">
+        <input class=" dict-input-name dict-text role" type="text" name="dictPost" id="" placeholder="Office Held"> 
+        </div>
+        <div class="dict-names">
+        <input class="dict-input-name" type="email" name="dictEmail" id="" placeholder="E-mail">
+        <input class="dict-input-name" type="tel" name="dictPhone" id="" placeholder="Phone No.">
+    </div>
+
+    </div>
+    
+</div>
+    <div class="third-dict">
+       
+        <div class="sub-dict">
+            
+            <input  type="file" name="dictImage" src="" alt="" placeholder="Image here">
+        </div>
+        
+    </div>
+    <div class="dict-button-div">
+    <button class = "dict-button" type="submit" name="button">Add Directory</button>
+</div>
+</div>
+
+</form>
+</div>
+
+
+<script>
+    // Navbar//
+var prevScrollpos = window.pageYOffset;
+
+
+window.onscroll = function() {
+var currentscrollpos = window.pageYOffset;
+
+if (prevScrollpos> currentscrollpos) {
+document.querySelector(".navbar").classList.add("visible");
+} else {
+document.querySelector(".navbar").classList.remove("visible")
+}
+prevScrollpos = currentscrollpos;
+}
+
+</script>
+</body>
+
+
+
+

@@ -7,19 +7,25 @@
 </div>
 
 <div id="post-section">
-<div class="postdate-box">
-    <h1 class="blog-date"> <%= date %></h1>
+<div class="postdate-box" >
+    
+    <% const newdate = date; %>
+    <% const month = date.toLocaleString('default', { month: 'short' }); %>
+    <% const newDay = date %>
+    <% const day = newDay.getDate() %>
+    
+    <h1 class="blog-date"> <%= (month) %> <%= (day) %></h1>
 </div>
 
-<h1 class="post-topic"><%= title %></h1>
+<h1 class="post-topic"> <%= title %> </h1>
 
 <h4 class="post-writer"> <%= author %></h4>
 
 <div class="post-img-box">
-   <img class="post-img" src="uploads/<%=image %>" alt=""> 
+   <img class="post-img" src="/uploads/<%=image %>" alt=""> 
 </div>
 
-<h1 class="post-subtopic"><%= title %></h1>
+<h1 class="post-subtopic"> <%= title %> </h1>
 
 <p class="post-content"><%= content %></p>
 
@@ -29,7 +35,7 @@
  
     <div class="articles-cards">
         <div class="single-card">
-            <img src="images/cancer-img.png" alt="" class="cards-img">
+            <img src="/images/cancer-img.png" alt="" class="cards-img">
 
             <div class="article-info">
             <div class="card-id">
@@ -52,5 +58,22 @@
 </div>
 </div>
 
+<script>
+    // Navbar//
+var prevScrollpos = window.pageYOffset;
+
+
+window.onscroll = function() {
+var currentscrollpos = window.pageYOffset;
+
+if (prevScrollpos> currentscrollpos) {
+document.querySelector(".navbar").classList.add("visible");
+} else {
+document.querySelector(".navbar").classList.remove("visible")
+}
+prevScrollpos = currentscrollpos;
+}
+
+</script>
 <%- include('partials/footer') %>
 

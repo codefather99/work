@@ -1,8 +1,6 @@
 <%- include('partials/header') %>
 
-
-
-<div >
+<div class="blog-heading-box" >
     <h1 class="blog-heading">
        Medix <span class="insight">insight</span> 
     </h1>
@@ -35,33 +33,31 @@
     <div class="blog-line"></div>
 </div>
 
+
 <% posts.forEach(function(post) { %>
     <div class="blog-box">
-       
+        <form action="/deletepost" method="post">
+            <button class="delete-dict" name="deletePost" value="<%=post._id%>" onclick="this.form.submit()" > <i class="fa-sharp fa-solid fa-xmark"></i> </button>
+        </form>
+
         <div class="date-box">
-            <h1 class="blog-date"> <%= (post.date) %></h1>
+            <% const date = new Date(post.date); %>
+            <% const month = date.toLocaleString('default', { month: 'short' }); %>
+            <% const day = date.getDate(); %>
+            
+            <h1 class="blog-date"> <%= (month) %> <%= (day) %></h1>
         </div>
         <div class="blog-post">
             
-            <h3  ><a href="/posts/<%=post.title%>" class="blog-topic"><%= (post.title) %></a></h3>
+            <h3  ><a href="/post/<%=post._id %>" class="blog-topic"><%= (post.title) %></a></h3>
             <h4 class="blog-writer"> <%= (post.author) %></h4>
             <div class="bloggish row">
-                <p class="blog-content  col-lg-7"><%= (post.content) %></p>
+                <p class="blog-content  col-lg-7"><%= (post.content).substring(0,300); %>...</p>
+                <!-- <p><%= post.content.substring(0,100); %><span>...</span> <a href="/post/<%= post._id; %>" >Read More</a></p> -->
 
                     <div class="blog-img-box col-lg-5">
 
-                       <!-- <% const displayImages = post.image.name; %>
-                       <% let imageArray = []; %>
-                       <% imageArray.push(displayImages); %>
-                       <% console.log ([imageArray[imageArray.length-1]]); %>
-                       <%images.forEach(function(image){ %>
-                        <% var pictureName = image.name; %>
-                       <% console.log (pictureName[images.length-1]); %>
-                        -->
-                        
-
-                       <!-- <% }); %> -->
-                       <a href="/post"><img class="blog-img" src=" uploads/<%=post.image.name%>" alt=""> </a>
+                       <a href="/post"><img class="blog-img" src=" uploads/<%=post.image%>" alt=""> </a>
          
 
                        <!-- im going to create a database and filter to find the image that is same as th imageArray -->
@@ -74,6 +70,24 @@
     </div>
 
     <div class="blog-line"></div>
+
+    <script>
+        // Navbar//
+var prevScrollpos = window.pageYOffset;
+
+
+window.onscroll = function() {
+  var currentscrollpos = window.pageYOffset;
+
+  if (prevScrollpos> currentscrollpos) {
+    document.querySelector(".navbar").classList.add("visible");
+  } else {
+    document.querySelector(".navbar").classList.remove("visible")
+  }
+  prevScrollpos = currentscrollpos;
+}
+
+    </script>
 <% }); %>
 
 <%- include('partials/footer') %>

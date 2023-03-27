@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+
+<div class="compose-dict">
+
+
+<H1>Compose Directory</H1>
+
+<form id="" action="/createdirectory" method="post" enctype="multipart/form-data">
+
+  <div class="form-group" >
+    <label >First Name</label>
+    <input class="form-control" type="text" name="dictFirstName" id="">  
+    <br>
+    <label >Last Name</label>
+    <input class="form-control" type="text" name="dictLastName" id="">  
+    <!-- remember to add required -->
+    <br>
+    <label >post Held</label>
+    <input class="form-control" type="text" name="dictPost">
+
+    <br>
+    <label >phone No.</label>
+    <input class="form-control" type="tel" name="dictPhone" id="">
+    <br>
+
+    <label >E-mail</label>
+    <input class="form-control" type="email" name="dictEmail" id="">
+    
+    <br>
+    <label >Add Image(< 10mb)</label>
+    <input class="form-control" type="file" name="dictImage" id="" >
+  </div>
+   <br>
+  <button class = "btn btn-primary post-submit" type="submit" name="button">Add Directory</button>
+
+</form>
+
+</div>
+
+<%- include('partials/footer') %>

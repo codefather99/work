@@ -1,9 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const ejs = require('ejs');
 const fileUpload = require("express-fileupload");
 const _ = require('lodash');
 const mongoose = require('mongoose');
+const $ = require('jquery');
 
 const app = express();
 
@@ -22,31 +22,46 @@ app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({extended:true}));
 
-mongoose.connect("mongodb://localhost:27017/blogpostDB", {useNewUrlParser: true});
-mongoose.set('strictQuery', true);
+mongoose.connect("mongodb://localhost:27017/blogpostDB");
+
 
 const blogpostsSchema = {
-    name : String
+    title : String,
+    content : String,
+    date : Date,
+    author : String,
+    image : String
 };
 
-const Blogpost = mongoose.model("Blogpost", blogpostsSchema)
+const Blogpost = mongoose.model("Blogpost", blogpostsSchema);
 
-const item1 = {
-    name : "bola"
+
+const directoriesSchema = {
+    firstname : String,
+    lastname : String,
+    title : String,
+    phone : String,
+    email : String,
+    image : String
 };
-const item2 = {
-    name : "tinubu"
-}
 
-let posts = [];
-let images =[];
+const Directory = mongoose.model("Directory", directoriesSchema);
 
-Blogpost.insertMany(posts, function(err){
-    if(err) {console.log(err);} 
-    else{console.log("successfully added to database");}
-})
+const gallerySchema = {
+    image : String,
+    text: String
+};
+
+const Gallery = mongoose.model("Gallery", gallerySchema);
 
 
+const foldersSchema = {
+    name : String,
+    lastname : String,
+    items : [directoriesSchema]
+};
+
+const Folder = mongoose.model("Folder", foldersSchema);
 
 
 
@@ -54,45 +69,86 @@ app.get("/", function(req,res){
     res.render("home");
 });
 
-app.get("/about", function(req,res){
-    res.render("about");
+
+app.get("/directory", function(req,res){
+    Directory.find({}, function(err, founddirectories){ 
+        res.render("directory", {dicts:founddirectories});
+    });
+});
+
+app.get("/gallery", function(req,res){
+    Gallery.find({},  function(err, foundimages){ 
+        res.render("gallery", {images:foundimages});
+    });
+});
+
+app.get("/admin", function(req,res){
+    res.render("admin");
+});
+
+app.get("/createdirectory", function(req,res){
+    res.render("createdirectory");
+});
+
+app.get("/addgallery", function(req,res){
+    res.render("addgallery");
 });
 
 app.get("/blog", function(req,res){
-    Blogpost.find({}, function(err, foundblogpost){
-        console.log(foundblogpost);
-    });
-    res.render("blog", {posts:posts, images:images});
-    // console.log(posts[0].image.name);
+    Blogpost.find({}, function(err, foundblogposts){ 
+        const newDate = foundblogposts;
+        // console.log(newDate[15].date);
+        res.render("blog", {posts:foundblogposts, dates : newDate });
+    
+    }); 
 });
-
-app.get("/debug", function(req,res){
-    res.render("debug");
-});
-
-
-
-
-app.get("/posts/:postName", function(req,res){
-    const requestedTitle = _.lowerCase(req.params.postName);
-
-    posts.forEach(function(post){
-        const storedTitle = _.lowerCase(post.title);
-
-        if (storedTitle === requestedTitle){
-            console.log('success');
-            res.render("debug", {
-               
-            });
-        }
-    });   
-});
-
 
 app.get("/compose", function(req,res){
     res.render("compose");
 });
 
+// app.get("/:directoryfolder", function(req,res){
+//    const createdFolder = req.params.directoryfolder;
+//    Folder.findOne({name:createdFolder}, function(err,foundfolder){
+//     if(!foundfolder){
+//         const folder = new Folder({
+//             name : createdFolder,
+//             items : directoriesSchema
+//            });
+//            folder.save();
+//     } else{
+//         res.render("directory", {foldername: foundfolder.name, folderitems:foundfolder.items});
+//     }
+//    })
+   
+// });
+
+
+app.post("/deletedirectory", function(req,res){
+ const deletedItem = req.body.deleteDict;
+ Directory.findByIdAndRemove(deletedItem, function(err){ 
+    if(err){console.log(err);}
+});
+res.redirect("/directory");
+});
+
+app.post("/deletepost", function(req,res){
+    const deletedItem = req.body.deletePost;
+    Blogpost.findByIdAndRemove(deletedItem, function(err){ 
+       if(err){console.log(err);}
+       res.redirect("/blog");
+   });
+   
+   });
+
+   app.post("/deleteimage", function(req,res){
+    const deletedItem = req.body.deleteimage;
+    Gallery.findByIdAndRemove(deletedItem, function(err){ 
+       if(err){console.log(err);}
+       res.redirect("/gallery");
+   });
+   
+   });
 
 app.post("/compose", function(req,res){
     const {postImage} = req.files;
@@ -103,27 +159,88 @@ app.post("/compose", function(req,res){
      // If does not have image mime type prevent from uploading
      if (/^postImage/.test(postImage.mimetype)) return res.sendStatus(400);
     
-    const post = {
-        title : req.body.postTitle,
+
+    const post = new Blogpost({ title : req.body.postTitle,
         content : req.body.postBody,
         date : req.body.postDate,
         author : req.body.postAuthor,
-        image : postImage
-    };
+        image : postImage.name
+    });
     
-
-    posts.push(post);
-    images.push(post.image);
    
-    res.redirect("/blog");
+    post.save(function(err){
+        if(!err){
+            res.redirect("/blog");
+        }
+    });
 });
 
-app.post("/upload", function(req,res){
+app.post("/createdirectory", function(req,res){
+    const {dictImage} = req.files;
+     dictImage.mv (__dirname + "/public/dictimages/" + dictImage.name);
+
+     if (!dictImage) return res.sendStatus(400);
+
+     // If does not have image mime type prevent from uploading
+     if (/^dictImage/.test(dictImage.mimetype)) return res.sendStatus(400);
     
 
-    console.log(postImage);
+    const dict = new Directory({ firstname : req.body.dictFirstName,
+        lastname : req.body.dictLastName,
+        title : req.body.dictPost,
+        phone : req.body.dictPhone,
+        email : req.body.dictEmail,
+        image : dictImage.name
+    });
     
+   
+    dict.save(function(err){
+        if(!err){
+            res.redirect("/directory");
+        }
+    });
 });
+
+app.post("/addgallery", function(req,res){
+    const {galleryImage} = req.files;
+     galleryImage.mv (__dirname + "/public/gallary/" + galleryImage.name);
+
+     if (!galleryImage) return res.sendStatus(400);
+
+     // If does not have image mime type prevent from uploading
+     if (/^galleryImage/.test(galleryImage.mimetype)) return res.sendStatus(400);
+    
+
+    const pic = new Gallery({ 
+        image : galleryImage.name,
+        text: req.body.galleryDesc
+    });
+    
+   
+    pic.save(function(err){
+        if(!err){
+            res.redirect("/gallery");
+        }
+    });
+});
+
+
+
+app.get("/post/:postId", async function(req,res){
+    const requestedPostid = req.params.postId;
+
+    const post = await Blogpost.findById({_id : requestedPostid})
+    
+    res.render("post", {
+        title : post.title,
+        content : post.content,
+        date : post.date,
+        author : post.author,
+        image : post.image
+    });
+
+});
+
 
 
 

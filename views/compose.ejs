@@ -3,9 +3,9 @@
 <div class="compose-form">
 
 
-<H1>Compose</H1>
+<H1>Compose Text</H1>
 
-<form class="" action="/compose" method="post" enctype="multipart/form-data">
+<form id="" action="/compose" method="post" enctype="multipart/form-data">
 
   <div class="form-group" >
     <label >Title</label>
@@ -17,7 +17,7 @@
 
     <br>
     <label >Date</label>
-    <input class="form-control" type="date" name="postDate" id="" >
+    <input class="form-control" type="date" name="postDate" id="post-form" >
     
     <br>
     <label >Author</label>
@@ -28,9 +28,10 @@
     <input class="form-control" type="file" name="postImage" id="" >
   </div>
    <br>
-  <button class = "btn btn-primary" type="submit" name="button">Publish</button>
+  <button class = "btn btn-primary post-submit" type="submit" name="button">Publish</button>
 
 </form>
 
 </div>
 
+<%- include('partials/footer') %>
